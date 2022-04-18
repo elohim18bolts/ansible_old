@@ -25,6 +25,8 @@ To run the command check for the avialables tasks and select the one you prefer,
 ```
 ansible-playbook playbook.yml --user ansible --extra-vars "{home_user: username}"
 
+```
+
 
 ## Server
 
