@@ -7,3 +7,9 @@
   include_tasks: dwm.yml
   tags: dwm
 
+- name: "Setup tmux"
+  include_tasks: tmux.yml
+  tags:
+    - always
+    - tmux
+

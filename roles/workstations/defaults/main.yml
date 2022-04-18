@@ -9,6 +9,7 @@ arch_packages:
   - xorg-server
   - xorg-xinit
   - tmux
+  - bat
 
 arch_fonts:
   - dina-font

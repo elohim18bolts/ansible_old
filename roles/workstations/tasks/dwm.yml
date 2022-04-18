@@ -1,4 +1,5 @@
 - name: Fetch Dwm packages
+  become: true
   become_user: "{{ home_user }}"
   tags: always
   git:
@@ -30,6 +31,7 @@
     dest: /usr/share/xsessions/dwm.desktop
   
 - name: Fetching display manager[ly]
+  become: true
   become_user: "{{ home_user }}"
   tags: always
   git:
@@ -37,6 +39,7 @@
     dest: /home/{{ home_user }}/ly
 
 - name: Setting up xprofile
+  become: true
   become_user: "{{ home_user }}"
   tags: always
   copy:

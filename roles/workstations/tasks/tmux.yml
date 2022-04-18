@@ -1,9 +1,14 @@
-- name: Setup tmux
+- name: Setup tmux configuration
+  become: true
   become_user: "{{ home_user }}"
-  tags: always
   copy:
-    src: "{{ item }}"
-    dest: ~/.{{ item }}
-  loop:
-    - tmux
-    - tmux.conf
+    src: ~/.tmux.conf
+    dest: /home/{{ home_user }}/.tmux.conf
+
+- name: Add tmux folder
+  become: true
+  become_user: "{{ home_user }}"
+  ansible.posix.synchronize:
+    src: ~/.tmux/
+    dest: /home/{{ home_user }}/.tmux
+
