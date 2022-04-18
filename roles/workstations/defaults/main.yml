@@ -10,6 +10,7 @@ arch_packages:
   - xorg-xinit
   - tmux
   - bat
+  - openssh-server
 
 arch_fonts:
   - dina-font

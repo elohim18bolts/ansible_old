@@ -3,3 +3,9 @@
     name: ly
     state: started
     enabled: true
+
+- name: "polkit"
+  service:
+    name: polkit
+    state: started
+    enabled: true
