@@ -4,6 +4,6 @@
   tags: archlinux
 
 - name: "Install DWM suite"
-  become_user: "{{ home_user }}"
   include_tasks: dwm.yml
   tags: dwm
+

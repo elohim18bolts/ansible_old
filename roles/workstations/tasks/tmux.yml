@@ -1,0 +1,9 @@
+- name: Setup tmux
+  become_user: "{{ home_user }}"
+  tags: always
+  copy:
+    src: "{{ item }}"
+    dest: ~/.{{ item }}
+  loop:
+    - tmux
+    - tmux.conf

@@ -8,6 +8,7 @@ arch_packages:
   - xorg-xrandr
   - xorg-server
   - xorg-xinit
+  - tmux
 
 arch_fonts:
   - dina-font
