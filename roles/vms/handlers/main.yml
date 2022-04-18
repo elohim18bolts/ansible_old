@@ -1,0 +1,5 @@
+- name: "Start qemu-guest-agent"
+  service:
+    name: qemu-guest-agent
+    state: started
+    enabled: true

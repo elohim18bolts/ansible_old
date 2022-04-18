@@ -1,0 +1,9 @@
+- hosts: all
+  become: true
+  roles:
+    - base
+    - vms
+  
+- hosts: workstations
+  roles:
+     - workstations

@@ -1,0 +1,29 @@
+- name: Udate pacman
+  tags: always
+  become: true
+  community.general.pacman:
+    update_cache: true
+
+- name: Install general packages
+  tags: always
+  become: true
+  community.general.pacman:
+    name: "{{ arch_packages }}"
+    state: latest
+
+- name: Install fonts
+  become: true 
+  community.general.pacman:
+    name: "{{ arch_fonts }}"
+    state: latest
+
+- name: Download yay
+  git: 
+    repo: https://aur.archlinux.org/yay.git
+    dest: ~/yay
+
+- name: Install yay
+  shell:
+    cmd: cd ~/yay;makepkg -si --noconfirm;cd
+  args:
+    executable: /bin/bash

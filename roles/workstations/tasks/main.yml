@@ -1,0 +1,9 @@
+- name: "[Archlinux] Install workstations tasks"
+  include_tasks: arch.yml
+  when: ansible_distribution == "Archlinux"
+  tags: archlinux
+
+- name: "Install DWM suite"
+  become_user: "{{ home_user }}"
+  include_tasks: dwm.yml
+  tags: dwm

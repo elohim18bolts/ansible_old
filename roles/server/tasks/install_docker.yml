@@ -1,0 +1,44 @@
+- name: "Remove older Docker pkgs"
+  apt:
+    pkg:
+    - docker
+    - docker-engine
+    - docker.io
+    - containerd
+    - runc
+    state: absent
+
+- name: "Install Dependencies"
+  apt:
+    pkg:
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+    state: present
+
+- name: "Add GPG key"
+  shell:
+    cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+  args:
+    executable: /bin/bash
+
+- name: "Add stable repo to sourcelists"
+  shell:
+    cmd: >
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg]
+      https://download.docker.com/linux/ubuntu
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  args:
+    executable: /bin/bash
+
+- name: "Install Docker Engine"
+  apt:
+    pkg:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    state: latest
+    update_cache: yes
+  notify:
+  - "Start docker"

@@ -1,0 +1,4 @@
+- name: Running Docker Task
+  include_tasks: install_docker.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: [Docker, ubnt-server]

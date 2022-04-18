@@ -1,0 +1,57 @@
+- name: Fetch Dwm packages
+  become_user: "{{ home_user }}"
+  tags: always
+  git:
+    repo: git://git.suckless.org/{{ item }}
+    dest: /home/{{ home_user }}/{{ item }}
+  loop: "{{ dwm_suite }}"
+
+- name: Installing dwm
+  become: true
+  tags: always
+  shell:
+    cmd: cd /home/{{ home_user }}/{{ item }} && make && make install
+  args:
+    executable: /bin/bash
+  loop: "{{ dwm_suite }}"
+
+- name: Setting up XSession folders
+  become: true
+  tags: always 
+  file:
+    path: /usr/share/xsessions/
+    state: directory
+
+- name: Adding dwm.desktop entry
+  become: true
+  tags: always
+  copy:
+    src: dwm.desktop
+    dest: /usr/share/xsessions/dwm.desktop
+  
+- name: Fetching display manager[ly]
+  become_user: "{{ home_user }}"
+  tags: always
+  git:
+    repo: https://aur.archlinux.org/ly
+    dest: /home/{{ home_user }}/ly
+
+- name: Setting up xprofile
+  become_user: "{{ home_user }}"
+  tags: always
+  copy:
+    src: xprofile
+    dest: /home/{{ home_user }}/.xprofile
+    force: true
+
+- name: "\x1b[33mIMPORTANT MESSAGE\x1b[0m"
+  tags: always
+  debug:
+    msg: 
+      - "You need to install ly and start the service manually doe to password prompt and security."
+      - "cd /home/{{ home_user }}/ly && makepkg -si"
+  # shell:
+  #     cmd: cd /home/{{ home_user }}/ly && su {{ home_user }} && makepkg -si
+  # args:
+  #   executable: /bin/bash
+  # notify: "start ly"
